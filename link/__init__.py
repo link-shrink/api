@@ -1,2 +1,2 @@
-from .generate_short_link import generate_short_link
+from .generate_link_id import generate_link_id
 from .post_data import post_data

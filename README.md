@@ -15,7 +15,7 @@ Fetch the data for a short link.
 - **Body**: A JSON object containing the short URL ID.
     ```json
     {
-        "link": "link-id"
+        "link_id": "link-id"
     }
     ```
 
@@ -23,8 +23,9 @@ Fetch the data for a short link.
 - Example response:
     ```json
     {
-        "short_link": "link-id",
-        "long_link": "long-link"
+        "link_id": "link-id",
+        "short_link": "short-link",
+        "original_link": "original-link"
     }
     ```
 
@@ -37,7 +38,7 @@ Create a short link for a given long URL.
 - **Body**: A JSON object containing the long URL.
     ```json
     {
-        "link": "long-link"
+        "link": "original-link"
     }
     ```
 
@@ -45,7 +46,8 @@ Create a short link for a given long URL.
 - Example response:
     ```json
     {
-        "short_link": "link-id",
-        "long_link": "long-link"
+        "link_id": "link-id",
+        "short_link": "short-link",
+        "original_link": "original-link"
     }
     ```
