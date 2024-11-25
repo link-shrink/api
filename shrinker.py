@@ -15,9 +15,10 @@ class LinkIDRequest(BaseModel):
 
 
 def get_response(data):
+    link_id = data["link_id"]
     return {
-        "link_id": data["link_id"],
-        "short_link": f"aj-linkshrink.web.app/l/{data["link_id"]}",
+        "link_id": link_id,
+        "short_link": f"aj-linkshrink.web.app/l/{link_id}",
         "original_link": data["original_link"],
     }
 
