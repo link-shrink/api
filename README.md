@@ -8,30 +8,21 @@ AJ-Linkshrink is a simple URL shortening API that allows you to convert long URL
 
 ## Endpoints
 
-### `GET /api/get/link`
+### `GET /link/{link_id}`
 Fetch the data for a short link.
-
-#### Request
-- **Body**: A JSON object containing the short URL ID.
-    ```json
-    {
-        "link_id": "link-id"
-    }
-    ```
 
 #### Response
 - Example response:
     ```json
     {
         "link_id": "link-id",
-        "short_link": "short-link",
         "original_link": "original-link"
     }
     ```
 
 ---
 
-### `POST /api/post/link`
+### `POST /link/create`
 Create a short link for a given long URL.
 
 #### Request
