@@ -1,39 +1,45 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import link
 import firestoreDB
 
 app = FastAPI()
 
-
-class LinkRequest(BaseModel):
-    link: str
-
-
-class LinkIDRequest(BaseModel):
-    link_id: str
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 
 def get_response(data):
     link_id = data["link_id"]
     return {
+        "ok": True,
         "link_id": link_id,
         "short_link": f"aj-linkshrink.web.app/l/{link_id}",
         "original_link": data["original_link"],
     }
 
 
-@app.get("/api/get/link")
-async def get_data_by_short_link(link_id_req: LinkIDRequest):
-    data = (
-        await firestoreDB.get_firestore_where("links", "link_id", link_id_req.link_id)
-    )[0]
+@app.get("/link/{link_id}")
+async def get_link(link_id):
+    data = await firestoreDB.get_firestore_where("links", "link_id", link_id)
+    if len(data) == 0:
+        return {"ok": False, "message": "Link not found"}
 
-    return get_response(data)
+    return data[0]
 
 
-@app.post("/api/post/link")
-async def post_data_by_long_link(link_req: LinkRequest):
+class CreateLink(BaseModel):
+    link: str
+
+
+@app.post("/link/create")
+async def create_link(link_req: CreateLink):
     data = await firestoreDB.get_firestore_where(
         "links", "original_link", link_req.link
     )
