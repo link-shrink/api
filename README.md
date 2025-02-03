@@ -1,10 +1,10 @@
-# AJ-Linkshrink
+# Linkshrink
 
-AJ-Linkshrink makes your URL simpler.
+Linkshrink makes your URL simpler.
 
 ## Overview
 
-AJ-Linkshrink is a simple URL shortening API that allows you to convert long URLs into shorter, more manageable links. It uses FastAPI for the backend and integrates with Firebase Firestore for storage. The API is deployed on Render for reliable hosting and scalability.
+Linkshrink is a simple URL shortening API that allows you to convert long URLs into shorter, more manageable links. It uses FastAPI for the backend and integrates with Firebase Firestore for storage. The API is deployed on Render for reliable hosting and scalability.
 
 ## Endpoints
 

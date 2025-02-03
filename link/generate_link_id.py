@@ -3,7 +3,7 @@ import string
 import firestoreDB
 
 
-def get_random_link(length=12):
+def get_random_link(length=6):
     length = int(length)
     return "".join(
         random.choices(
@@ -12,7 +12,7 @@ def get_random_link(length=12):
     )
 
 
-async def generate_link_id(length=12, max_retries=10):
+async def generate_link_id(length=6, max_retries=10):
     for _ in range(max_retries):
         random_id = get_random_link(length)
         if not await firestoreDB.get_firestore("links", random_id):
