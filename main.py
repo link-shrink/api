@@ -20,7 +20,7 @@ def get_response(data):
     return {
         "ok": True,
         "link_id": link_id,
-        "short_link": f"q.uz/{link_id}",
+        "short_link": f"keskn.uz/{link_id}",
         "original_link": data["original_link"],
     }
 
