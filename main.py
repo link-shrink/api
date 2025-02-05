@@ -20,7 +20,7 @@ def get_response(data):
     return {
         "ok": True,
         "link_id": link_id,
-        "short_link": f"keskn.uz/{link_id}",
+        "short_link": f"https://keskn.uz/{link_id}",
         "original_link": data["original_link"],
     }
 
@@ -31,7 +31,7 @@ async def get_link(link_id):
     if len(data) == 0:
         return {"ok": False, "message": "Link not found"}
 
-    return data[0]
+    return get_response(data[0])
 
 
 class CreateLink(BaseModel):
