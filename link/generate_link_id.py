@@ -1,21 +1,22 @@
-import random
-import string
 import firestoreDB
 
 
-def get_random_link(length=6):
-    length = int(length)
-    return "".join(
-        random.choices(
-            string.ascii_uppercase + string.ascii_lowercase + string.digits, k=length
-        )
-    )
+async def generate_link_id():
+    quantity = await firestoreDB.get_firestore("milestones", "links")
+    unique_id = generate_unique_string(quantity["quantity"])
 
-
-async def generate_link_id(length=6, max_retries=10):
-    for _ in range(max_retries):
-        random_id = get_random_link(length)
-        if not await firestoreDB.get_firestore("links", random_id):
-            return {"ok": True, "link_id": random_id}
+    if unique_id:
+        return {"ok": True, "link_id": unique_id}
 
     return {"ok": False, "Error": "Couln't generate short link, try again."}
+
+
+def generate_unique_string(num):
+    result = ""
+    base62 = "LtQSHIPTg73MiVdEyo1vRz6bZJAxuaeCGKWshmr45fqkFBn9Y0XljNcD2UwO8p"
+
+    while num > 0:
+        result = base62[num % 62] + result
+        num //= 62
+
+    return result.zfill(6)
